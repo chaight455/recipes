@@ -1,20 +1,19 @@
 import { neon } from "@neondatabase/serverless";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-export const config = { runtime: "edge" };
+const sql = neon(process.env.DATABASE_URL!);
 
-export default async function handler(req: Request) {
-  const sql = neon(process.env.DATABASE_URL!);
-
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "GET") {
     const recipes = await sql`SELECT * FROM recipes ORDER BY created_at DESC`;
-    return Response.json(recipes);
+    return res.json(recipes);
   }
 
   if (req.method === "POST") {
-    const { title, description, instructions, servings, cook_time_minutes } = await req.json();
+    const { title, description, instructions, servings, cook_time_minutes } = req.body;
 
     if (!title || !instructions) {
-      return Response.json({ error: "title and instructions are required" }, { status: 400 });
+      return res.status(400).json({ error: "title and instructions are required" });
     }
 
     const [recipe] = await sql`
@@ -22,21 +21,21 @@ export default async function handler(req: Request) {
       VALUES (${title}, ${description}, ${instructions}, ${servings}, ${cook_time_minutes})
       RETURNING *
     `;
-    return Response.json(recipe, { status: 201 });
+    return res.status(201).json(recipe);
   }
 
   if (req.method === "PATCH") {
-    const { id, favorite } = await req.json();
+    const { id, favorite } = req.body;
 
     if (id === undefined || favorite === undefined) {
-      return Response.json({ error: "id and favorite are required" }, { status: 400 });
+      return res.status(400).json({ error: "id and favorite are required" });
     }
 
     const [recipe] = await sql`
       UPDATE recipes SET favorite = ${favorite} WHERE id = ${id} RETURNING *
     `;
-    return Response.json(recipe);
+    return res.json(recipe);
   }
 
-  return Response.json({ error: "Method not allowed" }, { status: 405 });
+  return res.status(405).json({ error: "Method not allowed" });
 }

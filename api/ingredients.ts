@@ -1,20 +1,19 @@
 import { neon } from "@neondatabase/serverless";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-export const config = { runtime: "edge" };
+const sql = neon(process.env.DATABASE_URL!);
 
-export default async function handler(req: Request) {
-  const sql = neon(process.env.DATABASE_URL!);
-
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "GET") {
     const ingredients = await sql`SELECT * FROM ingredients ORDER BY name ASC`;
-    return Response.json(ingredients);
+    return res.json(ingredients);
   }
 
   if (req.method === "POST") {
-    const { name } = await req.json();
+    const { name } = req.body;
 
     if (!name) {
-      return Response.json({ error: "name is required" }, { status: 400 });
+      return res.status(400).json({ error: "name is required" });
     }
 
     const [ingredient] = await sql`
@@ -23,8 +22,8 @@ export default async function handler(req: Request) {
       ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name
       RETURNING *
     `;
-    return Response.json(ingredient, { status: 201 });
+    return res.status(201).json(ingredient);
   }
 
-  return Response.json({ error: "Method not allowed" }, { status: 405 });
+  return res.status(405).json({ error: "Method not allowed" });
 }

@@ -1,15 +1,13 @@
 import { neon } from "@neondatabase/serverless";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-export const config = { runtime: "edge" };
+const sql = neon(process.env.DATABASE_URL!);
 
-export default async function handler(req: Request) {
-  const sql = neon(process.env.DATABASE_URL!);
-  const url = new URL(req.url);
-  const recipeId = url.searchParams.get("recipe_id");
-
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "GET") {
+    const recipeId = req.query.recipe_id;
     if (!recipeId) {
-      return Response.json({ error: "recipe_id is required" }, { status: 400 });
+      return res.status(400).json({ error: "recipe_id is required" });
     }
 
     const ingredients = await sql`
@@ -19,14 +17,14 @@ export default async function handler(req: Request) {
       WHERE ri.recipe_id = ${recipeId}
       ORDER BY i.name ASC
     `;
-    return Response.json(ingredients);
+    return res.json(ingredients);
   }
 
   if (req.method === "POST") {
-    const { recipe_id, ingredient_id, quantity, unit } = await req.json();
+    const { recipe_id, ingredient_id, quantity, unit } = req.body;
 
     if (!recipe_id || !ingredient_id) {
-      return Response.json({ error: "recipe_id and ingredient_id are required" }, { status: 400 });
+      return res.status(400).json({ error: "recipe_id and ingredient_id are required" });
     }
 
     const [row] = await sql`
@@ -34,19 +32,19 @@ export default async function handler(req: Request) {
       VALUES (${recipe_id}, ${ingredient_id}, ${quantity}, ${unit})
       RETURNING *
     `;
-    return Response.json(row, { status: 201 });
+    return res.status(201).json(row);
   }
 
   if (req.method === "DELETE") {
-    const { id } = await req.json();
+    const { id } = req.body;
 
     if (!id) {
-      return Response.json({ error: "id is required" }, { status: 400 });
+      return res.status(400).json({ error: "id is required" });
     }
 
     await sql`DELETE FROM recipe_ingredients WHERE id = ${id}`;
-    return new Response(null, { status: 204 });
+    return res.status(204).end();
   }
 
-  return Response.json({ error: "Method not allowed" }, { status: 405 });
+  return res.status(405).json({ error: "Method not allowed" });
 }
