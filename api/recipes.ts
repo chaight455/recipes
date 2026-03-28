@@ -23,5 +23,18 @@ export default async function handler(req: Request) {
     return Response.json(recipe, { status: 201 });
   }
 
+  if (req.method === "PATCH") {
+    const { id, favorite } = await req.json();
+
+    if (id === undefined || favorite === undefined) {
+      return Response.json({ error: "id and favorite are required" }, { status: 400 });
+    }
+
+    const [recipe] = await sql`
+      UPDATE recipes SET favorite = ${favorite} WHERE id = ${id} RETURNING *
+    `;
+    return Response.json(recipe);
+  }
+
   return Response.json({ error: "Method not allowed" }, { status: 405 });
 }
