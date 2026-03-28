@@ -31,6 +31,8 @@ function App() {
       const res = await fetch("/api/recipes");
       const data = await res.json();
       setRecipes(data);
+    } catch (err) {
+      console.error("Failed to fetch recipes:", err);
     } finally {
       setLoading(false);
     }

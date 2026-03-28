@@ -10,7 +10,7 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@neondatabase/serverless": "github:neondatabase/serverless",
+    "@neondatabase/serverless": "^0.10.4",
     "@tailwindcss/vite": "^4.2.2",
     "process": "^0.11.10",
     "react": "^19.2.4",
