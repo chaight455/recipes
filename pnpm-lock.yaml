@@ -12,6 +12,12 @@ importers:
 
   .:
     dependencies:
+      '@neondatabase/serverless':
+        specifier: github:neondatabase/serverless
+        version: https://codeload.github.com/neondatabase/serverless/tar.gz/2c51902827a043df0646caf6a5ed8d812e7fb9b6
+      process:
+        specifier: ^0.11.10
+        version: 0.11.10
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -27,18 +33,23 @@ importers:
         version: 19.2.3(@types/react@19.2.14)
       '@vitejs/plugin-react':
         specifier: ^6.0.1
-        version: 6.0.1(@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3))
+        version: 6.0.1(@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3))
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@latest
-        version: '@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3)'
+        version: '@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3)'
       vite-plus:
         specifier: latest
-        version: 0.1.14(@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3))(typescript@5.9.3)
+        version: 0.1.14(@types/node@22.19.15)(@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3))(typescript@5.9.3)
 
 packages:
+
+  '@neondatabase/serverless@https://codeload.github.com/neondatabase/serverless/tar.gz/2c51902827a043df0646caf6a5ed8d812e7fb9b6':
+    resolution: {tarball: https://codeload.github.com/neondatabase/serverless/tar.gz/2c51902827a043df0646caf6a5ed8d812e7fb9b6}
+    version: 1.0.2
+    engines: {node: '>=19.0.0'}
 
   '@oxc-project/runtime@0.121.0':
     resolution: {integrity: sha512-p0bQukD8OEHxzY4T9OlANBbEFGnOnjo1CYi50HES7OD36UO2yPh6T+uOJKLtlg06eclxroipRCpQGMpeH8EJ/g==}
@@ -335,6 +346,12 @@ packages:
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
+
+  '@types/node@22.19.15':
+    resolution: {integrity: sha512-F0R/h2+dsy5wJAUe3tAU6oqa2qbWY5TpNfL/RGmo1y38hiyO1w3x2jPtt76wmuaJI4DQnOBu21cNXQ2STIUUWg==}
+
+  '@types/pg@8.20.0':
+    resolution: {integrity: sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -642,6 +659,17 @@ packages:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
 
+  pg-int8@1.0.1:
+    resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
+    engines: {node: '>=4.0.0'}
+
+  pg-protocol@1.13.0:
+    resolution: {integrity: sha512-zzdvXfS6v89r6v7OcFCHfHlyG/wvry1ALxZo4LqgUoy7W9xhBDMaqOuMiF3qEV45VqsN6rdlcehHrfDtlCPc8w==}
+
+  pg-types@2.2.0:
+    resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
+    engines: {node: '>=4'}
+
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -660,6 +688,26 @@ packages:
   postcss@8.5.8:
     resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
     engines: {node: ^10 || ^12 || >=14}
+
+  postgres-array@2.0.0:
+    resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
+    engines: {node: '>=4'}
+
+  postgres-bytea@1.0.1:
+    resolution: {integrity: sha512-5+5HqXnsZPE65IJZSMkZtURARZelel2oXUEO8rH83VS/hxH5vv1uHquPg5wZs8yMAfdv971IU+kcPUczi7NVBQ==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-date@1.0.7:
+    resolution: {integrity: sha512-suDmjLVQg78nMK2UZ454hAG+OAW+HQPZ6n++TNDUX+L0+uUlLywnoxJKDou51Zm+zTCjrCl0Nq6J9C5hP9vK/Q==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-interval@1.2.0:
+    resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
+    engines: {node: '>=0.10.0'}
+
+  process@0.11.10:
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+    engines: {node: '>= 0.6.0'}
 
   react-dom@19.2.4:
     resolution: {integrity: sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==}
@@ -716,6 +764,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   vite-plus@0.1.14:
     resolution: {integrity: sha512-p4pWlpZZNiEsHxPWNdeIU9iuPix3ydm3ficb0dXPggoyIkdotfXtvn2NPX9KwfiQImU72EVEs4+VYBZYNcUYrw==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -738,7 +789,16 @@ packages:
       utf-8-validate:
         optional: true
 
+  xtend@4.0.2:
+    resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
+    engines: {node: '>=0.4'}
+
 snapshots:
+
+  '@neondatabase/serverless@https://codeload.github.com/neondatabase/serverless/tar.gz/2c51902827a043df0646caf6a5ed8d812e7fb9b6':
+    dependencies:
+      '@types/node': 22.19.15
+      '@types/pg': 8.20.0
 
   '@oxc-project/runtime@0.121.0': {}
 
@@ -889,6 +949,16 @@ snapshots:
 
   '@types/deep-eql@4.0.2': {}
 
+  '@types/node@22.19.15':
+    dependencies:
+      undici-types: 6.21.0
+
+  '@types/pg@8.20.0':
+    dependencies:
+      '@types/node': 22.19.15
+      pg-protocol: 1.13.0
+      pg-types: 2.2.0
+
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
       '@types/react': 19.2.14
@@ -897,18 +967,19 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
-  '@vitejs/plugin-react@6.0.1(@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3))':
+  '@vitejs/plugin-react@6.0.1(@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-rc.7
-      vite: '@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3)'
+      vite: '@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3)'
 
-  '@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3)':
+  '@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3)':
     dependencies:
       '@oxc-project/runtime': 0.121.0
       '@oxc-project/types': 0.122.0
       lightningcss: 1.32.0
       postcss: 8.5.8
     optionalDependencies:
+      '@types/node': 22.19.15
       fsevents: 2.3.3
       typescript: 5.9.3
 
@@ -930,11 +1001,11 @@ snapshots:
   '@voidzero-dev/vite-plus-linux-x64-musl@0.1.14':
     optional: true
 
-  '@voidzero-dev/vite-plus-test@0.1.14(@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3))(typescript@5.9.3)':
+  '@voidzero-dev/vite-plus-test@0.1.14(@types/node@22.19.15)(@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3))(typescript@5.9.3)':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@types/chai': 5.2.3
-      '@voidzero-dev/vite-plus-core': 0.1.14(typescript@5.9.3)
+      '@voidzero-dev/vite-plus-core': 0.1.14(@types/node@22.19.15)(typescript@5.9.3)
       es-module-lexer: 1.7.0
       obug: 2.1.1
       pixelmatch: 7.1.0
@@ -944,8 +1015,10 @@ snapshots:
       tinybench: 2.9.0
       tinyexec: 1.0.4
       tinyglobby: 0.2.15
-      vite: '@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3)'
+      vite: '@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3)'
       ws: 8.20.0
+    optionalDependencies:
+      '@types/node': 22.19.15
     transitivePeerDependencies:
       - '@arethetypeswrong/core'
       - '@tsdown/css'
@@ -1111,6 +1184,18 @@ snapshots:
 
   path-key@3.1.1: {}
 
+  pg-int8@1.0.1: {}
+
+  pg-protocol@1.13.0: {}
+
+  pg-types@2.2.0:
+    dependencies:
+      pg-int8: 1.0.1
+      postgres-array: 2.0.0
+      postgres-bytea: 1.0.1
+      postgres-date: 1.0.7
+      postgres-interval: 1.2.0
+
   picocolors@1.1.1: {}
 
   picomatch@4.0.4: {}
@@ -1126,6 +1211,18 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  postgres-array@2.0.0: {}
+
+  postgres-bytea@1.0.1: {}
+
+  postgres-date@1.0.7: {}
+
+  postgres-interval@1.2.0:
+    dependencies:
+      xtend: 4.0.2
+
+  process@0.11.10: {}
 
   react-dom@19.2.4(react@19.2.4):
     dependencies:
@@ -1167,11 +1264,13 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  vite-plus@0.1.14(@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3))(typescript@5.9.3):
+  undici-types@6.21.0: {}
+
+  vite-plus@0.1.14(@types/node@22.19.15)(@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
       '@oxc-project/types': 0.122.0
-      '@voidzero-dev/vite-plus-core': 0.1.14(typescript@5.9.3)
-      '@voidzero-dev/vite-plus-test': 0.1.14(@voidzero-dev/vite-plus-core@0.1.14(typescript@5.9.3))(typescript@5.9.3)
+      '@voidzero-dev/vite-plus-core': 0.1.14(@types/node@22.19.15)(typescript@5.9.3)
+      '@voidzero-dev/vite-plus-test': 0.1.14(@types/node@22.19.15)(@voidzero-dev/vite-plus-core@0.1.14(@types/node@22.19.15)(typescript@5.9.3))(typescript@5.9.3)
       cac: 7.0.0
       cross-spawn: 7.0.6
       oxfmt: 0.42.0
@@ -1220,3 +1319,5 @@ snapshots:
       isexe: 2.0.0
 
   ws@8.20.0: {}
+
+  xtend@4.0.2: {}
