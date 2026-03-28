@@ -49,7 +49,8 @@ Vite+ automatically detects and wraps the underlying package manager such as pnp
 - outdated - Check for outdated packages
 - list (`ls`) - List installed packages
 - why (`explain`) - Show why a package is installed
-- info (`view`, `show`) - View package information from the registry
+- info (`view`, `show`) - View pac
+  kage information from the registry
 - link (`ln`) / unlink - Manage local package links
 - pm - Forward a command to the package manager
 
